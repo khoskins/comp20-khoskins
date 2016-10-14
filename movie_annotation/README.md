@@ -9,7 +9,7 @@ stated. The time that each subtitle appears is not exact, but rounded to the
 nearest whole number in seconds.
 
 Collaboration:
-I collaborated with Claudia Mihm and Caroline Nowack. 
+I collaborated with Claudia Mihm and Caroline Nowak. 
 
 Time Spent:
 2 hours 
