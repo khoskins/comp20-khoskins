@@ -6,13 +6,36 @@
 	<title>Captain's Log</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
-	  // Your work will be done here...
+		$(document).ready(function(){
+			$('#msg').on('change', function () {
+					console.log("detected change");
+					txt = document.getElementById("msg").value;
+					localStorage[new Date()] = txt;
+					reload();
+			});
+		})
+
+		function reload () {
+			console.log("reloading");
+			output = "";
+			for (key in localStorage) {
+				output = "<h3>" + key + " - </h3>" + "<p>" + localStorage[key] + "</p>\n" + output;
+			}
+			console.log(output);
+			$("log").text(output);
+		}
+
+		/*function newlog() {
+			txt = document.getElementById("msg").value;
+			localStorage[new Date()] = txt;
+			reload();
+		}*/
 	</script>
 </head>
 
 <body>
 	<h1>Captain's Log</h1>
-	<h3>New entry: <input type="text" id="msg" name="msg" size="30" /></h3>
+	<h3>New entry: <input type="text" id="msg" name="msg" size="30"/></h3>
 	<div id="log"></div>
 </body>
 </html>
