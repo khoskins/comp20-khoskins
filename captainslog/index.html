@@ -8,7 +8,6 @@
 	<script>
 		$(document).ready(function(){
 			$('#msg').on('change', function () {
-					console.log("detected change");
 					txt = document.getElementById("msg").value;
 					localStorage[new Date()] = txt;
 					reload();
@@ -16,13 +15,14 @@
 		})
 
 		function reload () {
-			console.log("reloading");
+			elem = document.getElementById("log");
 			output = "";
 			for (key in localStorage) {
 				output = "<h3>" + key + " - </h3>" + "<p>" + localStorage[key] + "</p>\n" + output;
 			}
-			console.log(output);
-			$("log").text(output);
+			elem.innerHTML = output;
+
+			/*$("log").text(output);*/
 		}
 
 		/*function newlog() {
