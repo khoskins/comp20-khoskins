@@ -7,6 +7,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
+			reload();
 			$('#msg').on('change', function () {
 					txt = document.getElementById("msg").value;
 					localStorage[new Date()] = txt;
@@ -15,21 +16,12 @@
 		})
 
 		function reload () {
-			elem = document.getElementById("log");
 			output = "";
 			for (key in localStorage) {
 				output = "<h3>" + key + " - </h3>" + "<p>" + localStorage[key] + "</p>\n" + output;
 			}
-			elem.innerHTML = output;
-
-			/*$("log").text(output);*/
+			$("#log").html(output);
 		}
-
-		/*function newlog() {
-			txt = document.getElementById("msg").value;
-			localStorage[new Date()] = txt;
-			reload();
-		}*/
 	</script>
 </head>
 
