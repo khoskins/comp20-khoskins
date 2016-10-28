@@ -63,7 +63,7 @@ function renderMap()
 
     for (var i = 0; i < numstationsA; i++) {
         pos = new google.maps.LatLng(stationsA[i].lat, stationsA[i].lon)
-        var marker = new google.maps.Marker({position: pos, title: stationsA[i].stop})
+        var marker = new google.maps.Marker({animation: google.maps.Animation.DROP, position: pos, title: stationsA[i].stop, icon:"mbtaicon.png"})
         marker.setMap(map);
 
          google.maps.event.addListener(marker, 'click', function() {
@@ -75,7 +75,7 @@ function renderMap()
     for (var i = 0; i < numstationsB; i++) {
         console.log(i);
         pos = new google.maps.LatLng(stationsB[i].lat, stationsB[i].lon)
-        var marker = new google.maps.Marker({position: pos, title: stationsB[i].stop})
+        var marker = new google.maps.Marker({animation: google.maps.Animation.DROP, position: pos, title: stationsB[i].stop, icon:"mbtaicon.png"})
         marker.setMap(map);
 
         google.maps.event.addListener(marker, 'click', function() {
@@ -87,7 +87,7 @@ function renderMap()
     for (var i = 0; i < numstationsC; i++) {
         console.log(i);
         pos = new google.maps.LatLng(stationsC[i].lat, stationsC[i].lon)
-        var marker = new google.maps.Marker({position: pos, title: stationsC[i].stop})
+        var marker = new google.maps.Marker({animation: google.maps.Animation.DROP, position: pos, title: stationsC[i].stop, icon:"mbtaicon.png"})
         marker.setMap(map);
 
         google.maps.event.addListener(marker, 'click', function() {
@@ -129,7 +129,8 @@ function renderMap()
     // Create a marker
     marker = new google.maps.Marker({
       position: me,
-      title: "Here I Am!"
+      title: "Here I Am!",
+      icon:"me.png"
     });
 
     trainPathA.setMap(map);
