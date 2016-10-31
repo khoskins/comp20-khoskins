@@ -77,7 +77,6 @@ function renderMap()
                 alert ("Error loading train data. Please refresh page.");
             else {
                 var timedata = JSON.parse(request.responseText);
-                console.log(timedata);
                 showTrainData(timedata);
             }
         }
@@ -99,7 +98,7 @@ function showTrainData(timedata) {
 
          google.maps.event.addListener(marker, 'click', function() {
           var sched = getNextTrains(this.title, timedata);
-          infowindow.setContent(this.title.toString()+ sched);
+          infowindow.setContent("<h1>" + this.title.toString() + "</h1>" + sched);
           infowindow.open(map, this);
         });
     }
@@ -113,11 +112,7 @@ function showTrainData(timedata) {
 
         google.maps.event.addListener(marker, 'click', function() {
           var sched = getNextTrains(this.title, timedata);
-          var blah = this.title.toString() + sched;
-          console.log(blah);
-          console.log(sched);
-          console.log(this.title);
-          infowindow.setContent(blah);
+          infowindow.setContent("<h1>" + this.title.toString() + "</h1>" + sched);
           infowindow.open(map, this);
         });
     }
@@ -131,7 +126,7 @@ function showTrainData(timedata) {
 
         google.maps.event.addListener(marker, 'click', function() {
           var sched = getNextTrains(this.title, timedata);
-          infowindow.setContent(this.title.toString() + sched);
+          infowindow.setContent("<h1>" + this.title.toString() + "</h1>" + sched);
           infowindow.open(map, this);
         });
     }
@@ -205,20 +200,34 @@ function findNearestStation(me, marker, stations, names) {
 
 function getNextTrains(currStation, currTrains) {
     var nextTrains = [];
+    var formattedTrains = [];
 
 
     var result = currTrains.TripList.Trips.map( function(trip) {
         for (var i = 0; i < trip.Predictions.length; i++)
         {
             if (trip.Predictions[i].Stop == currStation){
-               var schedObj = "Destination " + trip.Destination.toString() + " Arrives In " + trip.Predictions[i].Seconds.toString() + " seconds. ";
-               console.log(schedObj);
+               var seconds = trip.Predictions[i].Seconds
+               var schedObj = {"Seconds": seconds, "Destination": trip.Destination.toString()}
                nextTrains.push(schedObj);
             }
         }
     });
 
-    console.log(nextTrains);
-    console.log(nextTrains.toString());
-    return nextTrains.toString();
+    nextTrains.sort( function (a, b) {
+        if (a.Seconds > b.Seconds)
+           return 1;
+        else
+           return -1;
+    });
+
+    var formattedResult = nextTrains.map (function (item) {
+        var seconds = item.Seconds
+        var minutes = Math.floor(seconds/60)
+        var seconds = seconds - (minutes * 60)
+        var schedObj = "<p> Destination " + item.Destination + " arrives In " + minutes.toString() + " minutes, " + seconds.toString() + " seconds. </p>";
+        formattedTrains.push(schedObj);
+    });
+
+    return formattedTrains.toString().replace(/\,/g,"");
 }
