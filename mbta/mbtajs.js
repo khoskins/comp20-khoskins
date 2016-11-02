@@ -71,7 +71,7 @@ function getMyLocation() {
  * if they arise, and makes call to process the data */
 function renderMap()
 {
-    request.open('GET', 'https://rocky-taiga-26352.herokuapp.com/redline.json',
+    request.open('GET', 'https://dry-peak-77207.herokuapp.com/redline.json',
                                                                          true);
     request.send();
 
